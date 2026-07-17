@@ -1,100 +1,50 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intellectually Questionable</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero-shell">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
 
-const posts = [
+      <div class="hero-controls top-left">
+        <button class="button secondary audio-toggle" id="audioToggle" type="button" aria-pressed="false">🔊 Play Audio</button>
+      </div>
 
-{
-type:"thought",
-date:"July 17, 2026",
-text:"Most people are not afraid of failure. They are afraid of failing publicly."
-},
+      <div class="hero-controls top-right">
+        <a class="button secondary glitch-link" href="thoughts.html">[enter archives]</a>
+      </div>
 
-{
-type:"quote",
-date:"July 16, 2026",
-text:"A strong opinion should still leave the door unlocked."
-},
+      <div class="hero-content">
+        <div class="hero-copy">
+          <h1>INTELLECTUALLY<br />QUESTIONABLE</h1>
+          <p class="hero-text">A public archive of private thinking.</p>
+        </div>
+      </div>
+    </header>
 
-{
-type:"thought",
-date:"July 15, 2026",
-text:"The internet rewards certainty. Intelligence often begins with doubt."
-},
+    <footer class="site-footer">
+      <p>This is not advice.</p>
+      <p>It's evidence of thinking.</p>
+    </footer>
 
-{
-type:"quote",
-date:"July 14, 2026",
-text:"Some ideas need an audience. Others need a witness."
-}
+    <script>
+      const video = document.querySelector('.hero-video');
+      const audioToggle = document.getElementById('audioToggle');
 
-];
-
-function renderPosts(filter="all"){
-
-const container=document.getElementById("posts");
-
-let filtered=filter==="all"
-?posts
-:posts.filter(post=>post.type===filter);
-
-container.innerHTML="";
-
-filtered.forEach(post=>{
-
-container.innerHTML+=`
-<div class="entry">
-<div class="entry-type">${post.type}</div>
-<div class="entry-text">${post.text}</div>
-<div class="entry-date">${post.date}</div>
-</div>
-`;
-
-});
-
-}
-
-function filterPosts(type,button){
-
-document
-.querySelectorAll(".tab")
-.forEach(tab=>tab.classList.remove("active"));
-
-button.classList.add("active");
-
-renderPosts(type);
-
-}
-
-renderPosts();
-
-const video = document.getElementById("heroVideo");
-const soundButton = document.getElementById("soundButton");
-
-soundButton.addEventListener("click", async () => {
-
-    try {
-
-        video.muted = false;
-
-        await video.play();
-
-        soundButton.innerHTML = "🔈 SOUND OFF";
-
-        soundButton.onclick = () => {
-
-            video.muted = true;
-
-            soundButton.innerHTML = "🔊 SOUND ON";
-
-            soundButton.onclick = null;
-
-        };
-
-    } catch (error) {
-
-        console.log(error);
-
-    }
-
-});
-
-</script>
+      if (video && audioToggle) {
+        audioToggle.addEventListener('click', () => {
+          video.muted = !video.muted;
+          audioToggle.textContent = video.muted ? '🔊 Play Audio' : '🔈 Pause Audio';
+          audioToggle.setAttribute('aria-pressed', String(!video.muted));
+        });
+      }
+    </script>
+  </body>
+</html>
