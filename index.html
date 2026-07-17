@@ -1,0 +1,100 @@
+<script>
+
+const posts = [
+
+{
+type:"thought",
+date:"July 17, 2026",
+text:"Most people are not afraid of failure. They are afraid of failing publicly."
+},
+
+{
+type:"quote",
+date:"July 16, 2026",
+text:"A strong opinion should still leave the door unlocked."
+},
+
+{
+type:"thought",
+date:"July 15, 2026",
+text:"The internet rewards certainty. Intelligence often begins with doubt."
+},
+
+{
+type:"quote",
+date:"July 14, 2026",
+text:"Some ideas need an audience. Others need a witness."
+}
+
+];
+
+function renderPosts(filter="all"){
+
+const container=document.getElementById("posts");
+
+let filtered=filter==="all"
+?posts
+:posts.filter(post=>post.type===filter);
+
+container.innerHTML="";
+
+filtered.forEach(post=>{
+
+container.innerHTML+=`
+<div class="entry">
+<div class="entry-type">${post.type}</div>
+<div class="entry-text">${post.text}</div>
+<div class="entry-date">${post.date}</div>
+</div>
+`;
+
+});
+
+}
+
+function filterPosts(type,button){
+
+document
+.querySelectorAll(".tab")
+.forEach(tab=>tab.classList.remove("active"));
+
+button.classList.add("active");
+
+renderPosts(type);
+
+}
+
+renderPosts();
+
+const video = document.getElementById("heroVideo");
+const soundButton = document.getElementById("soundButton");
+
+soundButton.addEventListener("click", async () => {
+
+    try {
+
+        video.muted = false;
+
+        await video.play();
+
+        soundButton.innerHTML = "🔈 SOUND OFF";
+
+        soundButton.onclick = () => {
+
+            video.muted = true;
+
+            soundButton.innerHTML = "🔊 SOUND ON";
+
+            soundButton.onclick = null;
+
+        };
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+});
+
+</script>
