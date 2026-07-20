@@ -99,6 +99,39 @@
         line-height: 1.45;
       }
 
+      .audio-player {
+        position: fixed;
+        left: 1rem;
+        top: 1rem;
+        z-index: 10;
+        background: rgba(15, 15, 15, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(245, 240, 232, 0.15);
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        max-width: 280px;
+      }
+
+      audio {
+        width: 160px;
+        height: 28px;
+      }
+
+      audio::-webkit-media-controls-panel {
+        background: transparent;
+      }
+
+      audio::-webkit-media-controls-time-remaining-display {
+        display: none;
+      }
+
+      audio::-webkit-media-controls-current-time-display {
+        display: none;
+      }
+
       .progress-indicator {
         position: fixed;
         right: 1rem;
@@ -163,10 +196,25 @@
         .progress-indicator {
           display: none;
         }
+
+        .audio-player {
+          top: auto;
+          bottom: 5rem;
+          left: 50%;
+          transform: translateX(-50%);
+          max-width: 90vw;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="audio-player" aria-label="Audio player">
+      <audio controls>
+        <source src="https://www.youtube.com/watch?v=buDPt29n48s" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
     <main class="thought-page">
       <section class="thought-entry" id="first-thought">
         <div class="thought-content thought-intro">
@@ -213,7 +261,7 @@
       <section class="thought-entry">
         <div class="thought-content">
           <div class="thought-number">006</div>
-          <strong>"Can you imagine someone loving you freely? Meaning their love is always there, unconditionally. Unconventionally. Through every version of you. Through good and bad decisions. Through self discovery. Through self harm. At your best and worst. Thank you for loving me through every season"</strong>
+          <strong>"Can you imagine someone loving you freely? Meaning their love is always there, unconditionally. Unconventionally. Through every version of you. Through good and bad decisions. Through every failure and success."</strong>
           <br />
           <a class="back-link" href="#first-thought">BACK TO THE BEGINNING</a>
         </div>
